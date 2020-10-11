@@ -265,37 +265,38 @@ for l in range(3):
     fig1, ax1 = plt.subplots()
     fig2, ax2 = plt.subplots()
     fig3, ax3 = plt.subplots()
-
+    ifine = np.arange(-lower, lower)
+    xlimit = lower / (lambda0*np.power(timer[-1],1/3))
     for k in np.arange(timesample):
         xmin = int(particles*0.5) + int(v0*timer[k]) - lower
         xmax = int(particles*0.5) + int(v0*timer[k]) + lower
         
         
-        ax1.plot(xlaterale/(lambda0*np.power(timer[k],1/3)), np.power(timer[k],1/3)*betainv*S22plot[k,xmin:xmax],linewidth = 3, color = color[k], alpha = 0.8,label ='t = %.0f'%timer[k])
+        ax1.plot(ifine/(lambda0*np.power(timer[k],1/3)), np.power(timer[k],1/3)*betainv*S22plot[k,xmin:xmax],linewidth = 3, color = color[k], alpha = 0.8,label ='t = %.0f'%timer[k])
         ax1.set_title(r'Airy scaling  $S_{11}$')
         ax1.set_ylabel(r'$t^{\frac{1}{3}}S_{11}$')
         ax1.set_xlabel(r'$(j-v_0t)/(\lambda_0t^{\frac{1}{3}})$')
-        ax1.set_xlim(-0.25,0.25)
+        ax1.set_xlim(-xlimit,xlimit)
         
         
-        ax2.plot(xlaterale/(lambda0*np.power(timer[k],1/3)), np.power(timer[k],1/3)*betainv*S21plot[k,xmin:xmax],linewidth = 3,color = color[k], alpha = 0.8,label ='t = %.0f'%timer[k])
+        ax2.plot(ifine/(lambda0*np.power(timer[k],1/3)), np.power(timer[k],1/3)*betainv*S21plot[k,xmin:xmax],linewidth = 3,color = color[k], alpha = 0.8,label ='t = %.0f'%timer[k])
         ax2.set_title(r'Airy scaling  $S_{21}$')
         ax2.set_ylabel(r'$t^{\frac{1}{3}}S_{21}$')
         ax2.set_xlabel(r'$(j-v_0t)/(\lambda_0t^{\frac{1}{3}})$')
-        ax2.set_xlim(-0.25,0.25)
+        ax2.set_xlim(-xlimit,xlimit)
         
-        ax3.plot(xlaterale/(lambda0*np.power(timer[k],1/3)), np.power(timer[k],2/3)*betainv*S33plot[k,xmin:xmax],linewidth = 3, color =color[k], alpha = 0.8,label ='t = %.0f'%timer[k])
+        ax3.plot(ifine/(lambda0*np.power(timer[k],1/3)), np.power(timer[k],2/3)*betainv*S33plot[k,xmin:xmax],linewidth = 3, color =color[k], alpha = 0.8,label ='t = %.0f'%timer[k])
         ax3.set_title(r'Airy scaling  $S_{33}$')
         ax3.set_ylabel(r'$t^{\frac{2}{3}}S_{33}$')
         ax3.set_xlabel(r'$(j-v_0t)/(\lambda_0t^{\frac{1}{3}})$')
-        ax3.set_xlim(-0.25,0.25)
+        ax3.set_xlim(-xlimit,xlimit)
 
 
     
-    ifine = np.arange(-lower, lower)
-    ax1.plot(xlaterale/(lambda0*np.power(timer[2],1/3)), special_airy(ifine/(lambda0*timer[2]**(1/3))),linewidth = 3, color ='k', label = 'Airy') 
-    ax2.plot(xlaterale/(lambda0*np.power(timer[2],1/3)), -special_airy(ifine/(lambda0*timer[2]**(1/3))),linewidth = 3,  color ='k', label = 'Airy') 
-    ax3.plot(xlaterale/(lambda0*np.power(timer[2],1/3)), 2*special_airy(ifine/(lambda0*timer[2]**(1/3)))*special_airy(ifine/(lambda0*timer[2]**(1/3))),linewidth = 3,  color ='k', label = 'Airy')
+    
+    ax1.plot(ifine/(lambda0*np.power(timer[2],1/3)), special_airy(ifine/(lambda0*timer[2]**(1/3))),linewidth = 3, color ='k', label = 'Airy') 
+    ax2.plot(ifine/(lambda0*np.power(timer[2],1/3)), -special_airy(ifine/(lambda0*timer[2]**(1/3))),linewidth = 3,  color ='k', label = 'Airy') 
+    ax3.plot(ifine/(lambda0*np.power(timer[2],1/3)), 2*special_airy(ifine/(lambda0*timer[2]**(1/3)))*special_airy(ifine/(lambda0*timer[2]**(1/3))),linewidth = 3,  color ='k', label = 'Airy')
     ax1.legend(loc =1 )
     ax2.legend(loc =1 )
     ax3.legend(loc =1 )
